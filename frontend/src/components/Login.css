@@ -1,0 +1,255 @@
+/* Login Page Viewport Container */
+.login-page-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  padding: 2rem;
+}
+
+/* Split-screen Wrapper */
+.login-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 960px;
+  background: var(--panel-bg);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+/* Left Image Column */
+.login-image-column {
+  flex: 1;
+  background: linear-gradient(135deg, var(--panel-bg) 0%, var(--bg-color) 100%);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-right: none;
+}
+
+.login-image-column h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.03em;
+}
+
+.login-image-column p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  max-width: 320px;
+  margin: 0 auto 2rem auto;
+  line-height: 1.6;
+}
+
+.login-bus-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.05));
+  animation: float-bus 3s ease-in-out infinite, drift-vibration 0.12s linear infinite;
+}
+
+@keyframes float-bus {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes drift-vibration {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-0.5px, -0.5px) rotate(-0.1deg); }
+  50% { transform: translate(0, 0.5px) rotate(0.1deg); }
+  75% { transform: translate(0.5px, -0.5px) rotate(-0.1deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Bus Animation Container */
+.bus-animation-container {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto 2rem auto;
+}
+
+/* Smoke and air puffs */
+.wheel-smoke {
+  position: absolute;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wheel-smoke.front-wheel {
+  left: 17%;
+  bottom: 8%;
+}
+
+.wheel-smoke.back-wheel {
+  left: 77%;
+  bottom: 8%;
+}
+
+/* Smoke Particles styling */
+.particle {
+  position: absolute;
+  background: radial-gradient(circle, var(--smoke-color-core) 0%, var(--smoke-color-outer) 45%, transparent 90%);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  opacity: 0;
+  transform: scale(0.2) translate(0, 0);
+  filter: blur(1.5px);
+}
+
+.p1 {
+  animation: smoke-puff 1.6s infinite ease-out;
+}
+
+.p2 {
+  animation: smoke-puff 1.6s infinite ease-out 0.5s;
+}
+
+.p3 {
+  animation: smoke-puff 1.6s infinite ease-out 1.0s;
+}
+
+@keyframes smoke-puff {
+  0% {
+    opacity: 0;
+    transform: scale(0.1) translate(0, 0);
+  }
+  20% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.8) translate(35px, -3px);
+    background: radial-gradient(circle, var(--smoke-color-core) 0%, var(--smoke-color-outer) 50%, transparent 80%);
+  }
+}
+
+/* Right Form Column */
+.login-form-column {
+  width: 100%;
+  max-width: 480px;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+/* Modern Card Layout (Simplified as sub-container) */
+.login-card {
+  width: 100%;
+}
+
+/* Responsive adjustment for Mobile */
+@media (max-width: 768px) {
+  .login-image-column {
+    display: none;
+  }
+  .login-wrapper {
+    max-width: 460px;
+  }
+  .login-form-column {
+    padding: 2rem;
+  }
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-title {
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.login-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.login-toggle {
+  text-align: center;
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.login-toggle span {
+  color: var(--primary-color);
+  cursor: pointer;
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.login-toggle span:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+/* Quick Credentials Switcher Grid */
+.quick-login-list {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed var(--border-color);
+}
+
+.quick-login-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.quick-login-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.quick-login-btn {
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.quick-login-btn:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+  border-color: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+.dark .quick-login-btn:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+}

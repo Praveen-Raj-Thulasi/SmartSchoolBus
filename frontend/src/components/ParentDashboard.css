@@ -1,0 +1,466 @@
+/* Live trip progress timeline container */
+.trip-progress-container {
+  margin-top: 1.5rem;
+}
+
+/* Map canvas simulation with premium grid background */
+.map-mockup {
+  height: 250px;
+  background-color: #f1f5f9;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  margin-bottom: 1rem;
+  background-image: radial-gradient(#cbd5e1 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+}
+
+.map-stop {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: #94a3b8;
+  border: 2px solid white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 5;
+}
+
+.map-stop-name {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  font-weight: 600;
+  background-color: white;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  color: #475569;
+}
+
+.map-stop.active {
+  background-color: var(--primary-color);
+  width: 16px;
+  height: 16px;
+  box-shadow: 0 0 0 5px rgba(59, 130, 246, 0.25);
+  z-index: 8;
+}
+
+.map-stop.passed {
+  background-color: var(--success);
+}
+
+.map-bus-icon {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background-color: #ef4444;
+  border: 2px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transform: translate(-50%, -50%);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+  z-index: 10;
+  font-size: 0.95rem;
+}
+
+.map-path-line {
+  position: absolute;
+  height: 4px;
+  background-color: #e2e8f0;
+  transform-origin: left center;
+  z-index: 2;
+  border-radius: 2px;
+  transition: background-color 0.5s ease;
+}
+
+.map-path-line.passed {
+  background-color: #86efac;
+}
+
+/* Notification feeds */
+.notification-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.notification-item {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--panel-bg);
+  position: relative;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.notification-item.alert-alert {
+  border-left: 4px solid var(--warning);
+}
+
+.notification-item.alert-started {
+  border-left: 4px solid var(--primary-color);
+}
+
+.notification-item.alert-ended {
+  border-left: 4px solid var(--success);
+}
+
+.notif-icon-box {
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+}
+
+.notif-details {
+  flex: 1;
+}
+
+.notif-msg {
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+}
+
+.notif-time {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Satellite Map View Premium Overrides */
+.map-mockup.satellite .map-path-line {
+  background-color: rgba(255, 255, 255, 0.45);
+  height: 5px;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+}
+
+.map-mockup.satellite .map-path-line.passed {
+  background-color: #4ade80;
+  box-shadow: 0 0 10px #4ade80;
+}
+
+.map-mockup.satellite .map-stop {
+  background-color: #e2e8f0;
+  border: 2px solid #0f172a;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.map-mockup.satellite .map-stop.active {
+  background-color: #3b82f6;
+  border-color: white;
+  width: 16px;
+  height: 16px;
+  box-shadow: 0 0 14px #3b82f6, 0 0 0 5px rgba(59, 130, 246, 0.45);
+  z-index: 8;
+}
+
+.map-mockup.satellite .map-stop.passed {
+  background-color: #22c55e;
+  border-color: white;
+  box-shadow: 0 0 12px #22c55e;
+}
+
+.map-mockup.satellite .map-stop-name {
+  background-color: rgba(0, 0, 0, 0.88);
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.map-mockup.satellite .map-bus-icon {
+  background-color: #ef4444;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 18px #ef4444, 0 0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Leaflet Real Satellite Map styles */
+.leaflet-map-container {
+  height: 350px;
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  z-index: 1;
+  border: 1px solid var(--border-color);
+}
+
+.leaflet-tooltip.map-stop-tooltip {
+  font-weight: 600;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  opacity: 0.95 !important;
+}
+
+.leaflet-tooltip.map-stop-tooltip.street {
+  background-color: #ffffff;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+}
+
+.leaflet-tooltip.map-stop-tooltip.satellite {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.leaflet-bus-icon-container {
+  background: none;
+  border: none;
+}
+
+.map-bus-icon-leaflet {
+  width: 28px;
+  height: 28px;
+  background-color: #ef4444;
+  border: 2px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.8), 0 0 0 2px rgba(255, 255, 255, 0.8);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* Attendance Insights animations */
+.attendance-square-hover {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.attendance-square-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  filter: brightness(0.95);
+}
+
+.attendance-bar {
+  transition: opacity 0.2s ease, filter 0.2s ease;
+  cursor: pointer;
+}
+
+.attendance-bar:hover {
+  opacity: 0.85;
+  filter: brightness(1.1);
+}
+
+/* Chatbot float styles */
+.chatbot-float-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: #09090b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4), 0 0 10px rgba(249, 115, 22, 0.2);
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s;
+  border: none;
+  outline: none;
+}
+
+.chatbot-float-btn:hover {
+  transform: scale(1.08) rotate(5deg);
+  background-color: var(--primary-hover);
+}
+
+.chatbot-window {
+  position: fixed;
+  bottom: 92px;
+  right: 24px;
+  width: 380px;
+  height: 500px;
+  border-radius: 16px;
+  background-color: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  overflow: hidden;
+  animation: slide-up 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chatbot-header {
+  padding: 1rem;
+  background: var(--primary-color);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chatbot-header-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  font-size: 0.95rem;
+}
+
+.chatbot-close-btn {
+  background: none;
+  border: none;
+  color: #0f172a;
+  opacity: 0.8;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chatbot-close-btn:hover {
+  color: var(--text-main);
+}
+
+.chatbot-messages {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background-color: var(--bg-color);
+}
+
+.chat-bubble {
+  max-width: 80%;
+  padding: 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  position: relative;
+  word-break: break-word;
+}
+
+.chat-bubble.bot {
+  background-color: var(--panel-bg);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  align-self: flex-start;
+  border-top-left-radius: 2px;
+}
+
+.chat-bubble.user {
+  background-color: var(--primary-color);
+  color: #09090b;
+  align-self: flex-end;
+  border-top-right-radius: 2px;
+  font-weight: 500;
+}
+
+.chat-time {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+  text-align: right;
+  display: block;
+}
+
+.chatbot-quick-actions {
+  display: flex;
+  gap: 0.35rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--panel-bg);
+  border-top: 1px solid var(--border-color);
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.chatbot-quick-actions::-webkit-scrollbar {
+  display: none;
+}
+
+.quick-action-pill {
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 0.35rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.quick-action-pill:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background-color: rgba(249, 115, 22, 0.05);
+}
+
+.chatbot-input-area {
+  padding: 0.75rem 1rem;
+  background-color: var(--panel-bg);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chatbot-input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.chatbot-input:focus {
+  border-color: var(--primary-color);
+}
+
+.chatbot-send-btn {
+  background-color: var(--primary-color);
+  color: #09090b;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background-color 0.2s;
+}
+
+.chatbot-send-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+

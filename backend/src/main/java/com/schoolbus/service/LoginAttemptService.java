@@ -1,0 +1,44 @@
+package com.schoolbus.service;
+
+import org.springframework.stereotype.Service;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+@Service
+public class LoginAttemptService {
+
+    private final int MAX_ATTEMPT = 5;
+    private final long LOCK_TIME_DURATION = 5 * 60 * 1000; // 15 minutes
+
+    private Map<String, Integer> attemptsCache = new ConcurrentHashMap<>();
+    private Map<String, Long> lockTimeCache = new ConcurrentHashMap<>();
+
+    public void loginSucceeded(String key) {
+        attemptsCache.remove(key);
+        lockTimeCache.remove(key);
+    }
+
+    public void loginFailed(String key) {
+        int attempts = attemptsCache.getOrDefault(key, 0);
+        attempts++;
+        attemptsCache.put(key, attempts);
+        if (attempts >= MAX_ATTEMPT) {
+            lockTimeCache.put(key, System.currentTimeMillis());
+        }
+    }
+
+    public boolean isBlocked(String key) {
+        if (lockTimeCache.containsKey(key)) {
+            long lockTime = lockTimeCache.get(key);
+            if (System.currentTimeMillis() - lockTime > LOCK_TIME_DURATION) {
+                // Lock duration expired
+                lockTimeCache.remove(key);
+                attemptsCache.remove(key);
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+}

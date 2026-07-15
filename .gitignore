@@ -1,0 +1,17 @@
+# Maven build output
+**/target/
+*.class
+
+# Node / frontend build output and dependencies
+**/node_modules/
+**/dist/
+**/.vite/
+
+# IDE configuration files
+.idea/
+.vscode/
+*.iml
+
+# System files
+.DS_Store
+Thumbs.db
