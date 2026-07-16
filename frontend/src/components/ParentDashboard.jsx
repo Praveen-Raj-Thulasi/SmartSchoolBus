@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, useRef } from 'react';
-import { AppContext } from '../context/AppContext';
+import { AppContext, API_BASE } from '../context/AppContext';
 import { Shield, Map, Clock, Bell, User, TrendingUp, Calendar, Bot, MessageSquare, Send, X } from 'lucide-react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -358,7 +358,7 @@ ${multiChildNote}`;
 
     const fetchPrediction = async () => {
       try {
-        const res = await fetch(`http://localhost:8081/api/gps/trip/${activeTrip.tripId}/prediction`);
+        const res = await fetch(`${API_BASE}/api/gps/trip/${activeTrip.tripId}/prediction`);
         if (res.ok) {
           setDelayPrediction(await res.json());
         }

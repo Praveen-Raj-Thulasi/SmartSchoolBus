@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect, useRef } from 'react';
-import { AppContext } from '../context/AppContext';
+import { AppContext, API_BASE } from '../context/AppContext';
 import { Users, Truck, Compass, Calendar, Plus, Edit2, Trash2, FileSpreadsheet, MapPin, AlertTriangle, ShieldAlert, CheckCircle, Flame, Clock, QrCode } from 'lucide-react';
 import QRCode from 'qrcode';
 import L from 'leaflet';
@@ -286,7 +286,7 @@ export default function SchoolAdminDashboard() {
         let speed = 0;
 
         try {
-          const res = await fetch(`http://localhost:8081/api/gps/trip/${t.tripId}/latest`);
+          const res = await fetch(`${API_BASE}/api/gps/trip/${t.tripId}/latest`);
           if (res.ok) {
             const data = await res.json();
             latitude = data.latitude;

@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, useRef } from 'react';
-import { AppContext } from '../context/AppContext';
+import { AppContext, API_BASE } from '../context/AppContext';
 import { Play, Square, FastForward, Bus, MapPin, UserCheck, AlertTriangle, Radio, ShieldAlert, ScanLine, Landmark } from 'lucide-react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -399,7 +399,7 @@ export default function DriverDashboard() {
     if (!activeTrip) return;
     try {
       // Look up current open emergencies for this trip to resolve
-      const res = await fetch(`http://localhost:8081/api/emergency/active`);
+      const res = await fetch(`${API_BASE}/api/emergency/active`);
       if (res.ok) {
         const activeEms = await res.json();
         const tripEm = activeEms.find(e => e.tripId === activeTrip.tripId);
